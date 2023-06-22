@@ -36,7 +36,7 @@ namespace AgentDemo.Pages
 
         private void RefreshData()
         {
-            List<Agent> listBooks = _content.Agent.ToList();
+            var  listBooks = App.db.Agent.ToList();
             if (TypeCb.SelectedIndex != 0)
             {
                 AgentType selectedGenre = (AgentType)TypeCb.SelectedItem;
@@ -94,12 +94,42 @@ namespace AgentDemo.Pages
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var selAgent = (sender as Button).DataContext as Agent;
+            NavigationService.Navigate(new AddEditPage(selAgent));
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
+            var selAgent = (sender as Button).DataContext as Agent;
+            if(MessageBox.Show("Вы точно хотите удалить эту запись", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                var agentSaleToRemove = App.db.ProductSale.Where(a => a.AgentID == selAgent.ID);
+                if(agentSaleToRemove == null)
+                {
+                    MessageBox.Show("Невозможно удалить", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    App.db.ProductSale.RemoveRange(agentSaleToRemove);
+                    var shopToRemove = App.db.Shop.Where(a => a.AgentID == selAgent.ID);
+                    App.db.Shop.RemoveRange(shopToRemove);
+                    var priorityToRemove = App.db.AgentPriorityHistory.Where(a => a.AgentID == selAgent.ID);
+                    App.db.AgentPriorityHistory.RemoveRange(priorityToRemove);
 
+                    App.db.Agent.Remove(selAgent);
+                    App.db.SaveChanges();
+                    MessageBox.Show("Успешно удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    RefreshData();
+                }
+                
+                
+                
+                    
+            }
+
+
+           
         }
 
         
@@ -112,7 +142,7 @@ namespace AgentDemo.Pages
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AddEditPage(new Agent()));
         }
 
         

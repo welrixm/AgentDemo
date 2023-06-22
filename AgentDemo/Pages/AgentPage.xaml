@@ -8,6 +8,8 @@
       d:DesignHeight="590" d:DesignWidth="1000"
       Title="AgentPage" Loaded="Page_Loaded">
 
+
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -17,7 +19,7 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Список агентов" Style="{StaticResource TxtBlock1}"></TextBlock>
-        <Line Grid.Row="1" Stroke="Black" X1="1" StrokeThickness="5"></Line>
+        <Line Grid.Row="1" Stroke="Black" X2="1" StrokeThickness="2" Stretch="Fill"></Line>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
                 <TextBlock Style="{StaticResource TxtBlock2}" Text="Поиск"></TextBlock>
@@ -47,14 +49,14 @@
                                 <ColumnDefinition Width="100"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="200"></RowDefinition>
+                                <RowDefinition Height="300"></RowDefinition>
                             </Grid.RowDefinitions>
                             <!--<Image Source="{Binding Logo}"></Image>-->
-                            <Image Grid.Column="0" Grid.Row="0" RenderOptions.BitmapScalingMode="Fant" Width="200" Height="200">
+                            <Image Grid.Column="0" Grid.Row="0" RenderOptions.BitmapScalingMode="Fant" Height="100" Width="100" >
                                 <Image.Source>
-                                    <Binding Path="Logo">
+                                    <Binding Path="Logo" >
                                         <Binding.TargetNullValue>
-                                            <BitmapImage UriSource="/Resources/picture.png"></BitmapImage>
+                                            <BitmapImage UriSource="/Resources/picture.png" ></BitmapImage>
                                         </Binding.TargetNullValue>
                                     </Binding>
                                 </Image.Source>

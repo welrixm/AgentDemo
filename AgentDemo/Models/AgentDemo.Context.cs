@@ -25,7 +25,6 @@ namespace AgentDemo.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Agent> Agent { get; set; }
         public virtual DbSet<AgentPriorityHistory> AgentPriorityHistory { get; set; }
         public virtual DbSet<AgentType> AgentType { get; set; }
         public virtual DbSet<Material> Material { get; set; }
@@ -39,5 +38,6 @@ namespace AgentDemo.Models
         public virtual DbSet<Shop> Shop { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Agent> Agent { get; set; }
     }
 }
