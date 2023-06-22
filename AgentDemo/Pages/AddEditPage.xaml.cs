@@ -39,15 +39,11 @@ namespace AgentDemo.Pages
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            string count = context.Priority.ToString();
+            string priority = context.Priority.ToString();
             try
             {
 
-                if (count.Length == 0)
-                {
-                    MessageBox.Show("Пусто. Пожалуйста, заполните количество товара!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+               
                 if (string.IsNullOrEmpty(context.Title))
                 {
                     MessageBox.Show("Пожалуйста заполните поле наименования", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -88,7 +84,11 @@ namespace AgentDemo.Pages
                     MessageBox.Show("Пожалуйста заполните поле электронной почты", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
-                
+                if (priority.Length == 0)
+                {
+                    MessageBox.Show("Пусто. Пожалуйста, заполните приоритет товара!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 if (context.ID == 0)
                 {
                     App.db.Agent.Add(context);
